@@ -33,6 +33,7 @@ namespace Contacts.API
             services.AddControllers();
             services.AddSingleton<IUserService, UserManager>();
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSwaggerDocument();
             
         }
 
@@ -49,6 +50,9 @@ namespace Contacts.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseEndpoints(endpoints =>
             {

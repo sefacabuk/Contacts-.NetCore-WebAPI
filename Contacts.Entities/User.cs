@@ -9,8 +9,10 @@ namespace Contacts.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity) ]
         public string Id { get; set; }
         [StringLength(50)]
+        [Required]
         public string Ad { get; set; }
         [StringLength(50)]
+        [Required]
         public string Soyad { get; set; }
         [StringLength(50)]
         public string Firma { get; set; }

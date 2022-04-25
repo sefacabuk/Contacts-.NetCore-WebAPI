@@ -29,28 +29,49 @@ namespace Contacts.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public User Get(string id)
+        public IActionResult Get(string id)
         {
-            return _userService.GetUserById(id);
+            var user = _userService.GetUserById(id);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+
+            return NotFound();
         }
 
         [HttpPost]
-        public  User Post([FromBody] User user)
+        public  IActionResult Post([FromBody] User user)
         {
-            return _userService.CreateUser(user);
+            if (ModelState.IsValid)
+            {
+                var createUSer = _userService.CreateUser(user);
+                return CreatedAtAction("Get", new { id = createUSer.Id }, createUSer);
+
+            }
+            return BadRequest(ModelState);
 
         }
 
         [HttpPut]
-        public User Put([FromBody] User user)
+        public IActionResult Put([FromBody] User user)
         {
-            return _userService.UpdateUser(user);
+            if (_userService.GetUserById(user.Id) != null)
+            {
+                return Ok(_userService.UpdateUser(user));
+            }
+            return NotFound(); ;
         }
 
-        [HttpDelete]
-        public void Delete(string id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
-            _userService.Delete(id);
+            if (_userService.GetUserById(id) != null)
+            {
+                return Ok();
+            }
+
+            return NotFound();
         }
     }
 }

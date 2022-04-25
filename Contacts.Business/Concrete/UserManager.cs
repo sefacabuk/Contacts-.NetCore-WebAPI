@@ -43,6 +43,7 @@ namespace Contacts.Business.Concrete
         public User UpdateUser(User user)
         {
             return _userRepository.UpdateUser(user);
+
         }
     }
 }
