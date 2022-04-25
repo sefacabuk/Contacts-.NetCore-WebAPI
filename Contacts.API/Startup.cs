@@ -1,3 +1,7 @@
+using Contacts.Business.Abstract;
+using Contacts.Business.Concrete;
+using Contacts.DataAccess.Abstract;
+using Contacts.DataAccess.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +31,8 @@ namespace Contacts.API
         {
 
             services.AddControllers();
+            services.AddSingleton<IUserService, UserManager>();
+            services.AddSingleton<IUserRepository, UserRepository>();
             
         }
 

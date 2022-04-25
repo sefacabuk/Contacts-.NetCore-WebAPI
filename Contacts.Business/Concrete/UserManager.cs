@@ -14,9 +14,9 @@ namespace Contacts.Business.Concrete
     {
         private IUserRepository _userRepository;
 
-        public  UserManager()
+        public  UserManager(IUserRepository userRepository)
         {
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
 
         }
         public User CreateUser(User user)

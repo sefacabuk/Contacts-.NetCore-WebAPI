@@ -16,9 +16,9 @@ namespace Contacts.API.Controllers
     {
         private IUserService _userService;
 
-        public UsersController()
+        public UsersController(IUserService userService)
         {
-            _userService = new UserManager();
+            _userService = userService;
 
         }
 
