@@ -27,6 +27,7 @@ namespace Contacts.DataAccess.Concrete
                 var deleteUser = GetUserById(id);
                 userDbContext.Users.Remove(deleteUser);
                 userDbContext.SaveChanges();
+                return;
             }
 
             

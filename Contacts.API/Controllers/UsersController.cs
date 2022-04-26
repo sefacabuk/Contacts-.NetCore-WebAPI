@@ -34,7 +34,7 @@ namespace Contacts.API.Controllers
             var user = _userService.GetUserById(id);
             if (user != null)
             {
-                return Ok(user);
+                return Ok(new { Data = user});
             }
 
             return NotFound();
@@ -46,7 +46,7 @@ namespace Contacts.API.Controllers
             if (ModelState.IsValid)
             {
                 var createUSer = _userService.CreateUser(user);
-                return CreatedAtAction("Get", new { id = createUSer.Id }, createUSer);
+                return CreatedAtAction("Get", new { Success = true, Data = createUSer });
 
             }
             return BadRequest(ModelState);
@@ -58,7 +58,8 @@ namespace Contacts.API.Controllers
         {
             if (_userService.GetUserById(user.Id) != null)
             {
-                return Ok(_userService.UpdateUser(user));
+                var updateUser = _userService.UpdateUser(user);
+                return Ok(new { Success = true, Data = user });
             }
             return NotFound(); ;
         }
@@ -68,7 +69,8 @@ namespace Contacts.API.Controllers
         {
             if (_userService.GetUserById(id) != null)
             {
-                return Ok();
+                _userService.Delete(id);
+                return Ok(new { Success = true });
             }
 
             return NotFound();
